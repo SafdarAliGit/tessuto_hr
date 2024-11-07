@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include tessuto_hr *.css
+recursive-include tessuto_hr *.csv
+recursive-include tessuto_hr *.html
+recursive-include tessuto_hr *.ico
+recursive-include tessuto_hr *.js
+recursive-include tessuto_hr *.json
+recursive-include tessuto_hr *.md
+recursive-include tessuto_hr *.png
+recursive-include tessuto_hr *.py
+recursive-include tessuto_hr *.svg
+recursive-include tessuto_hr *.txt
+recursive-exclude tessuto_hr *.pyc
