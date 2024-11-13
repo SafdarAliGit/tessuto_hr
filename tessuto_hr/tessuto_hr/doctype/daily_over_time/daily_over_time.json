@@ -1,0 +1,121 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:DOT-{employee_name}-{DD}-{MM}-{#####}",
+ "creation": "2024-11-13 10:55:03.686284",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "employee_id",
+  "employee_name",
+  "department",
+  "check_in_time",
+  "check_out_time",
+  "column_break_vnig5",
+  "employee_shift",
+  "shift_hours",
+  "over_time_hours",
+  "check_in_ref",
+  "check_out_ref"
+ ],
+ "fields": [
+  {
+   "fetch_from": "employee_id.department",
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Department",
+   "options": "Department",
+   "read_only": 1
+  },
+  {
+   "fieldname": "check_in_time",
+   "fieldtype": "Datetime",
+   "label": "Check In Time",
+   "read_only": 1
+  },
+  {
+   "fieldname": "check_out_time",
+   "fieldtype": "Datetime",
+   "label": "Check Out Time",
+   "read_only": 1
+  },
+  {
+   "fieldname": "employee_shift",
+   "fieldtype": "Link",
+   "label": "Employee Shift",
+   "options": "Shift Type",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "shift_hours",
+   "fieldtype": "Float",
+   "label": "Shift Hours",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "over_time_hours",
+   "fieldtype": "Float",
+   "label": "Over Time Hours",
+   "read_only": 1
+  },
+  {
+   "fieldname": "employee_id",
+   "fieldtype": "Link",
+   "label": "Employee ID",
+   "options": "Employee",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee_id.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "check_in_ref",
+   "fieldtype": "Data",
+   "label": "Check IN Ref",
+   "read_only": 1
+  },
+  {
+   "fieldname": "check_out_ref",
+   "fieldtype": "Data",
+   "label": "Check OUT Ref",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_vnig5",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-11-13 14:54:45.182936",
+ "modified_by": "Administrator",
+ "module": "Tessuto Hr",
+ "name": "Daily Over Time",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

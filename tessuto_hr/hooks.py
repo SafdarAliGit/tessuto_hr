@@ -114,6 +114,10 @@ app_license = "MIT"
 #	"ToDo": "custom_app.overrides.CustomToDo"
 # }
 
+override_doctype_class = {
+    "Employee Checkin": "tessuto_hr.overrides.employee_checkin_override.EmployeeCheckinOverride",
+}
+
 # Document Events
 # ---------------
 # Hook on document methods and events
