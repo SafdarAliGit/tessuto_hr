@@ -18,7 +18,8 @@
   "shift_hours",
   "over_time_hours",
   "check_in_ref",
-  "check_out_ref"
+  "check_out_ref",
+  "date"
  ],
  "fields": [
   {
@@ -91,11 +92,17 @@
   {
    "fieldname": "column_break_vnig5",
    "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-13 14:54:45.182936",
+ "modified": "2024-11-14 19:17:36.453837",
  "modified_by": "Administrator",
  "module": "Tessuto Hr",
  "name": "Daily Over Time",
