@@ -6,8 +6,8 @@ from tessuto_hr.overrides.shift_hour import shift_hour
 
 
 class EmployeeCheckinOverride(EmployeeCheckin):
-    # def before_save(self):
-    #     self.shift = "Shift 1"
+    def before_save(self):
+        self.shift = "Shift 1"
 
     def on_update(self):
         """ Auto log_type IN Or OUT"""
