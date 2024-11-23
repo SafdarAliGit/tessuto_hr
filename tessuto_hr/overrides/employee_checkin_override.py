@@ -71,7 +71,7 @@ class EmployeeCheckinOverride(EmployeeCheckin):
                 "employee_id": self.employee
             })
 
-            if over_time > 0.5 and time_difference > shift_hours and not dailyovertime_exists:
+            if (over_time > 0.5 and time_difference > shift_hours and not dailyovertime_exists):
                 # Create Daily Over Time
                 dot = frappe.new_doc("Daily Over Time")
                 dot.employee_id = self.employee
