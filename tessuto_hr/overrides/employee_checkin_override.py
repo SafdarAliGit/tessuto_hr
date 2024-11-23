@@ -61,7 +61,7 @@ class EmployeeCheckinOverride(EmployeeCheckin):
             first_in_datetime = datetime.combine(today, first_in_time.time())
             last_out_datetime = datetime.combine(today, last_out_time.time())
             start_datetime = datetime.combine(today,(datetime.min + default_shift_type.start_time).time())
-            if first_in_datetime > start_datetime:
+            if first_in_datetime < start_datetime:
                 first_in_datetime = start_datetime
             time_difference = (last_out_datetime - first_in_datetime).total_seconds() / 3600
 
@@ -76,8 +76,8 @@ class EmployeeCheckinOverride(EmployeeCheckin):
                 # Create Daily Over Time
                 dot = frappe.new_doc("Daily Over Time")
                 dot.employee_id = self.employee
-                dot.check_in_time = first_in_time
-                dot.check_out_time = last_out_time
+                dot.check_in_time = first_in_datetime
+                dot.check_out_time = last_out_datetime
                 dot.employee_shift = self.shift
                 dot.shift_hours = shift_hours
                 dot.over_time_hours = over_time
