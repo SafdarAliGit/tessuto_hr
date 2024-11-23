@@ -6,8 +6,8 @@ from tessuto_hr.overrides.shift_hour import shift_hour
 
 
 class EmployeeCheckinOverride(EmployeeCheckin):
-    # def before_save(self):
-    #     self.shift = "Shift 1"
+    def before_save(self):
+        self.shift = "Shift 1"
 
     def on_update(self):
         """ Auto log_type IN Or OUT"""
@@ -58,19 +58,20 @@ class EmployeeCheckinOverride(EmployeeCheckin):
             first_in_name = first_in['name']
             last_out_name = last_out['name']
 
+            first_in_datetime = datetime.combine(today, first_in_time.time())
             last_out_datetime = datetime.combine(today, last_out_time.time())
             start_datetime = datetime.combine(today,(datetime.min + default_shift_type.start_time).time())
-            time_difference = (last_out_datetime - start_datetime).total_seconds() / 3600
+            if first_in_datetime > start_datetime:
+                first_in_datetime = start_datetime
+            time_difference = (last_out_datetime - first_in_datetime).total_seconds() / 3600
 
             shift_hours = shift_hour(self.shift)
             over_time = time_difference - shift_hours
-            print(f"last_out_datetime : {last_out_datetime} , start_datetime: {start_datetime} , time_difference: {time_difference} , over_time: {over_time}")
 
             dailyovertime_exists = frappe.db.exists("Daily Over Time", {
                 "date": today,
                 "employee_id": self.employee
             })
-
             if (over_time > 0.5 and time_difference > shift_hours and not dailyovertime_exists):
                 # Create Daily Over Time
                 dot = frappe.new_doc("Daily Over Time")
