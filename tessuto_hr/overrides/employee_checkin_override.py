@@ -21,8 +21,8 @@ class EmployeeCheckinOverride(EmployeeCheckin):
             as_dict=True
         )
 
-        if not checkin_list:
-            frappe.throw("No Employee Checkin Found For Today")
+        # if not checkin_list:
+        #     frappe.throw("No Employee Checkin Found For Today")
 
         if len(checkin_list) == 1:
             checkin = frappe.get_doc("Employee Checkin", checkin_list[0].name)
