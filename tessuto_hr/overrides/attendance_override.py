@@ -23,6 +23,6 @@ class AttendanceOverride(Attendance):
             self.custom_late_entry_count = count
         self.custom_late_entry_count = count
 
-        # Check if count is a multiple of 3 (e.g., 3, 6, 9, etc.)
-        if count > 0 and count % 3 == 0:
+        days_for_absent_mark = frappe.db.get_single_value("Attendance Settings", 'days_for_absent_mark')
+        if count > 0 and count % days_for_absent_mark == 0:
             self.status = "Absent"
