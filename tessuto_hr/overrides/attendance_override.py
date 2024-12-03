@@ -19,7 +19,7 @@ class AttendanceOverride(Attendance):
 
         # Update the custom late entry count field
         if self.late_entry == 1:
-            count += 1
+            count +=1
             self.custom_late_entry_count = count
         self.custom_late_entry_count = count
 
