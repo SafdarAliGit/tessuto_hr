@@ -94,4 +94,4 @@ class EmployeeCheckinOverride(EmployeeCheckin):
                     timesheet_detail.to_time = last_out_datetime
                     timesheet_detail.checkout_time = last_out_datetime
                     timesheet_detail.hours = over_time
-                    timesheet_doc.submit()
+                    timesheet_doc.save()

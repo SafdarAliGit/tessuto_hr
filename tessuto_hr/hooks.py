@@ -130,7 +130,11 @@ override_doctype_class = {
 #		"on_trash": "method"
 #	}
 # }
-
+doc_events = {
+"Timesheet": {
+    "on_submit": "tessuto_hr.events.add_up_over_time.submit",
+},
+}
 # Scheduled Tasks
 # ---------------
 
