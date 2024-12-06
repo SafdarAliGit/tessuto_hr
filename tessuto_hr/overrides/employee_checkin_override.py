@@ -84,3 +84,13 @@ class EmployeeCheckinOverride(EmployeeCheckin):
                     dot.check_in_ref = first_in_name
                     dot.check_out_ref = last_out_name
                     dot.save()
+
+                    timesheet_doc = frappe.new_doc("Timesheet")
+                    timesheet_doc.employee = self.employee
+                    timesheet_detail = timesheet_doc.append("time_logs", {})
+                    timesheet_detail.activity_type = "Execution"
+                    timesheet_detail.from_time = first_in_datetime
+                    timesheet_detail.to_time = last_out_datetime
+                    timesheet_detail.checkout_time = last_out_datetime
+                    timesheet_detail.hours = over_time
+                    timesheet_doc.submit()
