@@ -1,5 +1,5 @@
 from datetime import datetime, date
-
+from frappe.utils import getdate
 today = date.today()
 import frappe
 from hrms.hr.doctype.employee_checkin.employee_checkin import EmployeeCheckin
@@ -21,7 +21,7 @@ class EmployeeCheckinOverride(EmployeeCheckin):
             FROM `tabEmployee Checkin`
             WHERE employee = %s AND DATE(time) = %s AND shift = %s
             """,
-            (self.employee, self.time.date(), self.shift),
+            (self.employee, getdate(self.time), self.shift),
             as_dict=1
         )
         default_shift_type = frappe.get_doc("Shift Type", self.shift)
@@ -43,7 +43,7 @@ class EmployeeCheckinOverride(EmployeeCheckin):
         over_time = (last_out_datetime - end_datetime).total_seconds() / 3600
 
         dailyovertime_exists = frappe.db.exists("Daily Over Time", {
-            "date": self.time.date(),
+            "date": getdate(self.time),
             "employee_id": self.employee
         })
 
