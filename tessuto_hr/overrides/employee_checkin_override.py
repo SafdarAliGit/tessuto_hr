@@ -21,7 +21,7 @@ class EmployeeCheckinOverride(EmployeeCheckin):
             FROM `tabEmployee Checkin`
             WHERE employee = %s AND DATE(time) = %s AND shift = %s
             """,
-            (self.employee, self.time, self.shift),
+            (self.employee, self.time.date(), self.shift),
             as_dict=1
         )
         default_shift_type = frappe.get_doc("Shift Type", self.shift)
