@@ -15,7 +15,6 @@
   "check_out_time",
   "column_break_vnig5",
   "employee_shift",
-  "shift_hours",
   "over_time_hours",
   "check_in_ref",
   "check_out_ref",
@@ -47,13 +46,6 @@
    "fieldtype": "Link",
    "label": "Employee Shift",
    "options": "Shift Type",
-   "read_only": 1
-  },
-  {
-   "default": "0",
-   "fieldname": "shift_hours",
-   "fieldtype": "Float",
-   "label": "Shift Hours",
    "read_only": 1
   },
   {
@@ -102,7 +94,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-14 19:17:36.453837",
+ "modified": "2024-12-07 08:32:08.214783",
  "modified_by": "Administrator",
  "module": "Tessuto Hr",
  "name": "Daily Over Time",
