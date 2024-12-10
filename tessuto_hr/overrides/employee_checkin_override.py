@@ -8,7 +8,8 @@ from tessuto_hr.overrides.shift_hour import shift_hour
 
 class EmployeeCheckinOverride(EmployeeCheckin):
     def before_save(self):
-        self.shift = "Shift 1"
+        employee = frappe.get_doc("Employee", self.employee)
+        self.shift = employee.default_shift
 
     def on_update(self):
         if self.log_type == "OUT":
