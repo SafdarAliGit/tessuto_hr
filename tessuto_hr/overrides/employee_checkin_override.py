@@ -14,7 +14,7 @@ class AttendanceOverride(Attendance):
     #     employee = frappe.get_doc("Employee", self.employee)
     #     self.shift = employee.default_shift
 
-    def on_submit(self):
+    def after_save(self):
         employee = frappe.get_doc("Employee", self.employee)
         self.shift = employee.default_shift
 
