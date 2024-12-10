@@ -11,7 +11,7 @@ class EmployeeCheckinOverride(EmployeeCheckin):
     #     employee = frappe.get_doc("Employee", self.employee)
     #     self.shift = employee.default_shift
 
-    def after_save(self):
+    def after_insert(self):
         employee = frappe.get_doc("Employee", self.employee)
         # self.shift = employee.default_shift
         if self.log_type == "OUT":
