@@ -13,7 +13,7 @@ class EmployeeCheckinOverride(EmployeeCheckin):
 
     def after_insert(self):
         employee = frappe.get_doc("Employee", self.employee)
-        # self.shift = employee.default_shift
+        self.shift = employee.default_shift
         if self.log_type == "OUT":
             # Calculate Check IN and Check OUT time difference
             if not self.shift:
