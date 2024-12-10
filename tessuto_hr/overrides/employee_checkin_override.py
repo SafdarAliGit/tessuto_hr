@@ -1,20 +1,17 @@
 from datetime import datetime, date
 from frappe.utils import getdate
-from hrms.hr.doctype.attendance.attendance import Attendance
-from tessuto_hr.overrides.attendance_override import AttendanceOverride
-
 today = date.today()
 import frappe
 from hrms.hr.doctype.employee_checkin.employee_checkin import EmployeeCheckin
 from tessuto_hr.overrides.shift_hour import shift_hour
 
 
-class AttendanceOverride(Attendance):
+class EmployeeCheckinOverride(EmployeeCheckin):
     # def before_save(self):
     #     employee = frappe.get_doc("Employee", self.employee)
     #     self.shift = employee.default_shift
 
-    def on_submit(self):
+    def on_update(self):
         employee = frappe.get_doc("Employee", self.employee)
         self.shift = employee.default_shift
 
@@ -27,7 +24,7 @@ class AttendanceOverride(Attendance):
             FROM `tabEmployee Checkin`
             WHERE employee = %s AND DATE(time) = %s AND shift = %s
             """,
-            (self.employee, self.attendance_date, self.shift),
+            (self.employee, getdate(self.time), self.shift),
             as_dict=1
         )
         default_shift_type = frappe.get_doc("Shift Type", self.shift)
@@ -49,7 +46,7 @@ class AttendanceOverride(Attendance):
         over_time = (last_out_datetime - end_datetime).total_seconds() / 3600
 
         dailyovertime_exists = frappe.db.exists("Daily Over Time", {
-            "date": self.attendance_date,
+            "date": getdate(self.time),
             "employee_id": self.employee
         })
 

@@ -115,7 +115,7 @@ app_license = "MIT"
 # }
 
 override_doctype_class = {
-    "Attendance": "tessuto_hr.overrides.employee_checkin_override.AttendanceOverride",
+    "Employee Checkin": "tessuto_hr.overrides.employee_checkin_override.EmployeeCheckinOverride",
     # "Attendance":"tessuto_hr.overrides.attendance_override.AttendanceOverride"
 }
 
