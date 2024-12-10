@@ -7,13 +7,14 @@ from tessuto_hr.overrides.shift_hour import shift_hour
 
 
 class EmployeeCheckinOverride(EmployeeCheckin):
-    def before_save(self):
-        employee = frappe.get_doc("Employee", self.employee)
-        self.shift = employee.default_shift
+    # def before_save(self):
+    #     employee = frappe.get_doc("Employee", self.employee)
+    #     self.shift = employee.default_shift
 
-    def on_update(self):
+    def after_save(self):
+        employee = frappe.get_doc("Employee", self.employee)
+        # self.shift = employee.default_shift
         if self.log_type == "OUT":
-            employee = frappe.get_doc("Employee", self.employee)
             # Calculate Check IN and Check OUT time difference
             if not self.shift:
                 frappe.throw("Shift Type Not Found in Employee Checkin")
