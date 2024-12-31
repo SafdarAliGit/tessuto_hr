@@ -8,20 +8,17 @@ from tessuto_hr.overrides.shift_hour import shift_hour
 
 
 class EmployeeCheckinOverride(EmployeeCheckin):
-    # def before_save(self):
-    #     employee = frappe.get_doc("Employee", self.employee)
-    #     self.shift = employee.default_shift
-
-    def on_update(self):
+    def after_save(self):
         if self.log_type == "OUT":
             employee = frappe.get_doc("Employee", self.employee)
             self.shift = employee.default_shift
-            # Calculate Check IN and Check OUT time difference
+
             if not self.shift:
                 frappe.throw("Shift Type Not Found in Employee Checkin")
+
             checkin_list_with_shift = frappe.db.sql(
                 """
-                SELECT log_type, time,name 
+                SELECT log_type, time, name 
                 FROM `tabEmployee Checkin`
                 WHERE employee = %s AND DATE(time) = %s AND shift = %s
                 """,
@@ -42,6 +39,7 @@ class EmployeeCheckinOverride(EmployeeCheckin):
             last_out_datetime = datetime.combine(today, last_out_time.time())
             start_datetime = datetime.combine(today, (datetime.min + default_shift_type.start_time).time())
             end_datetime = datetime.combine(today, (datetime.min + default_shift_type.end_time).time())
+
             if first_in_datetime < start_datetime:
                 first_in_datetime = start_datetime
 
@@ -51,25 +49,58 @@ class EmployeeCheckinOverride(EmployeeCheckin):
                 "date": getdate(self.time),
                 "employee_id": self.employee
             })
+            print(f"Over Time: {over_time}, Employee Department: {employee.department}, Daily Over Time Exists: {dailyovertime_exists}")
+            if over_time > 0.5 and employee.department == "Production":
+                if dailyovertime_exists:
+                    # Update existing Daily Over Time
+                    dot = frappe.get_doc("Daily Over Time", dailyovertime_exists)
+                    dot.check_in_time = first_in_datetime
+                    dot.check_out_time = last_out_datetime
+                    dot.employee_shift = self.shift
+                    dot.over_time_hours = over_time
+                    dot.check_in_ref = first_in_name
+                    dot.check_out_ref = last_out_name
+                    dot.save()
+                else:
+                    # Create new Daily Over Time
+                    dot = frappe.new_doc("Daily Over Time")
+                    dot.employee_id = self.employee
+                    dot.date = getdate(self.time)
+                    dot.check_in_time = first_in_datetime
+                    dot.check_out_time = last_out_datetime
+                    dot.employee_shift = self.shift
+                    dot.over_time_hours = over_time
+                    dot.check_in_ref = first_in_name
+                    dot.check_out_ref = last_out_name
+                    dot.save()
 
-            if (over_time > 0.5 and not dailyovertime_exists and employee.department == "Production"):
-                # Create Daily Over Time
-                dot = frappe.new_doc("Daily Over Time")
-                dot.employee_id = self.employee
-                dot.check_in_time = first_in_datetime
-                dot.check_out_time = last_out_datetime
-                dot.employee_shift = self.shift
-                dot.over_time_hours = over_time
-                dot.check_in_ref = first_in_name
-                dot.check_out_ref = last_out_name
-                dot.save()
+                timesheet_exists = frappe.db.exists("Timesheet", {
+                    "employee": self.employee,
+                    "start_date": getdate(self.time)
+                })
 
-                timesheet_doc = frappe.new_doc("Timesheet")
-                timesheet_doc.employee = self.employee
-                timesheet_detail = timesheet_doc.append("time_logs", {})
-                timesheet_detail.activity_type = "Execution"
-                timesheet_detail.from_time = first_in_datetime
-                timesheet_detail.to_time = last_out_datetime
-                timesheet_detail.checkout_time = last_out_datetime
-                timesheet_detail.hours = over_time
-                timesheet_doc.save()
+                if timesheet_exists:
+                    # Update existing Timesheet
+                    timesheet_doc = frappe.get_doc("Timesheet", timesheet_exists)
+                    timesheet_doc.start_time = first_in_datetime
+                    timesheet_doc.end_time = last_out_datetime
+                    if timesheet_doc.time_logs:
+                        timesheet_detail = timesheet_doc.time_logs[0]
+                        timesheet_detail.from_time = first_in_datetime
+                        timesheet_detail.to_time = last_out_datetime
+                        timesheet_detail.checkout_time = last_out_datetime
+                        timesheet_detail.hours = over_time
+                    timesheet_doc.save()
+                else:
+                    # Create new Timesheet
+                    timesheet_doc = frappe.new_doc("Timesheet")
+                    timesheet_doc.employee = self.employee
+                    timesheet_doc.start_time = first_in_datetime
+                    timesheet_doc.end_time = last_out_datetime
+                    timesheet_detail = timesheet_doc.append("time_logs", {})
+                    timesheet_detail.activity_type = "Execution"
+                    timesheet_detail.from_time = first_in_datetime
+                    timesheet_detail.to_time = last_out_datetime
+                    timesheet_detail.checkout_time = last_out_datetime
+                    timesheet_detail.hours = over_time
+                    timesheet_doc.save()

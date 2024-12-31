@@ -114,10 +114,10 @@ app_license = "MIT"
 #	"ToDo": "custom_app.overrides.CustomToDo"
 # }
 
-override_doctype_class = {
-    "Employee Checkin": "tessuto_hr.overrides.employee_checkin_override.EmployeeCheckinOverride",
+# override_doctype_class = {
+#     "Employee Checkin": "tessuto_hr.overrides.employee_checkin_override.EmployeeCheckinOverride",
     # "Attendance":"tessuto_hr.overrides.attendance_override.AttendanceOverride"
-}
+# }
 
 # Document Events
 # ---------------
@@ -130,9 +130,14 @@ override_doctype_class = {
 #		"on_trash": "method"
 #	}
 # }
+# doc_events = {
+# "Timesheet": {
+#     "on_submit": "tessuto_hr.events.add_up_over_time.submit",
+# },
+# }
 doc_events = {
-"Timesheet": {
-    "on_submit": "tessuto_hr.events.add_up_over_time.submit",
+"Attendance": {
+    "on_submit": "tessuto_hr.events.atttendance.custom_on_submit",
 },
 }
 # Scheduled Tasks
