@@ -137,7 +137,7 @@ app_license = "MIT"
 # }
 doc_events = {
 "Attendance": {
-    "on_submit": "tessuto_hr.events.atttendance.custom_on_submit",
+    "on_submit": "tessuto_hr.events.attendance.custom_on_submit",
 },
 }
 # Scheduled Tasks
