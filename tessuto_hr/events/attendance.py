@@ -1,9 +1,9 @@
-from datetime import datetime, date
-today = date.today()
 import frappe
 from datetime import datetime, date
+today = date.today()
 
 def custom_before_submit(doc, method):
+    frappe.msgprint(f"In Time: {doc.in_time}, Out Time: {doc.out_time}")
     if not doc.in_time or not doc.out_time:
         return  # Skip processing if in_time or out_time is missing
 
