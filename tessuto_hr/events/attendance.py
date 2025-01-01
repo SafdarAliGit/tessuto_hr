@@ -32,7 +32,7 @@ def custom_before_submit(doc, method):
         timesheet_doc.employee = employee.name
         timesheet_doc.start_date = first_in_datetime
         timesheet_doc.end_date = last_out_datetime
-        timesheet_doc.custom_attendance = doc.name
+        timesheet_doc.attendance = doc.name
         timesheet_detail = timesheet_doc.append("time_logs", {})
         timesheet_detail.activity_type = "Execution"
         timesheet_detail.from_time = first_in_datetime
