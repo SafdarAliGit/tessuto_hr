@@ -39,4 +39,5 @@ def custom_on_submit(doc, method):
             timesheet_detail.hours = over_time
             timesheet_doc.save()
         doc.custom_over_time = over_time
+        doc.save()
 
