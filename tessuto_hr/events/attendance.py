@@ -3,7 +3,6 @@ from datetime import datetime, date
 today = date.today()
 
 def custom_before_submit(doc, method):
-    frappe.msgprint(f"In Time: {doc.in_time}, Out Time: {doc.out_time}")
     if not doc.in_time or not doc.out_time:
         return  # Skip processing if in_time or out_time is missing
 
@@ -38,7 +37,7 @@ def custom_before_submit(doc, method):
         timesheet_detail.from_time = first_in_datetime
         timesheet_detail.to_time = last_out_datetime
         timesheet_detail.hours = over_time
-        timesheet_doc.insert(ignore_permissions=True)  # Save Timesheet
+        timesheet_doc.save()  # Save Timesheet
 
     doc.custom_over_time = over_time  # Assign overtime to the Attendance doc
 
