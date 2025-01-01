@@ -39,6 +39,6 @@ def custom_before_submit(doc, method):
         timesheet_detail.hours = over_time
         timesheet_doc.save()  # Save Timesheet
 
-    doc.custom_over_time = over_time  # Assign overtime to the Attendance doc
+        doc.custom_over_time = over_time  # Assign overtime to the Attendance doc
 
 
