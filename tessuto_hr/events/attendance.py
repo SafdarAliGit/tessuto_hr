@@ -15,8 +15,8 @@ def custom_before_submit(doc, method):
 
     # Combine date and time for calculations
     today = date.today()
-    first_in_datetime = datetime.combine(today, (datetime.min + doc.in_time).time())
-    last_out_datetime = datetime.combine(today, (datetime.min + doc.out_time).time())
+    first_in_datetime = datetime.combine(today, (doc.in_time).time())  # Use .time() to extract time
+    last_out_datetime = datetime.combine(today, (doc.out_time).time())  # Use .time() to extract time
     shift_start_datetime = datetime.combine(today, (datetime.min + default_shift_type.start_time).time())
     shift_end_datetime = datetime.combine(today, (datetime.min + default_shift_type.end_time).time())
 
