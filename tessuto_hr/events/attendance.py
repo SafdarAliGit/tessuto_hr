@@ -15,10 +15,10 @@ def custom_before_submit(doc, method):
 
     # Combine date and time for calculations
     today = date.today()
-    first_in_datetime = datetime.combine(today, doc.in_time)
-    last_out_datetime = datetime.combine(today, doc.out_time)
-    shift_start_datetime = datetime.combine(today, default_shift_type.start_time)
-    shift_end_datetime = datetime.combine(today, default_shift_type.end_time)
+    first_in_datetime = datetime.combine(today, doc.in_time.time())
+    last_out_datetime = datetime.combine(today, doc.out_time.time())
+    shift_start_datetime = datetime.combine(today, default_shift_type.start_time.time())
+    shift_end_datetime = datetime.combine(today, default_shift_type.end_time.time())
 
     # Adjust first_in_datetime if it's earlier than shift start
     if first_in_datetime < shift_start_datetime:
