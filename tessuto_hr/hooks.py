@@ -29,7 +29,7 @@ app_license = "MIT"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {"Shift Type" : "public/js/shift_type.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -135,11 +135,11 @@ app_license = "MIT"
 #     "on_submit": "tessuto_hr.events.add_up_over_time.submit",
 # },
 # }
-doc_events = {
-"Attendance": {
-    "before_submit": "tessuto_hr.events.attendance.custom_before_submit",
-},
-}
+# doc_events = {
+# "Attendance": {
+#     "on_submit": "tessuto_hr.events.attendance.custom_on_submit",
+# },
+# }
 # Scheduled Tasks
 # ---------------
 
