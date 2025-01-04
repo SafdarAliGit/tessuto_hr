@@ -27,7 +27,7 @@ app_license = "MIT"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"Shift Type" : "public/js/shift_type.js"}
+doctype_js = {"Shift Type" : "public/js/shift_type.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -128,12 +128,12 @@ app_license = "MIT"
 #		"on_trash": "method"
 #	}
 # }
-doc_events = {
-    "Attendance": {
-        "before_save": "tessuto_hr.overrides.attendance_override.before_save",
-    }
-
-}
+# doc_events = {
+#     "Attendance": {
+#         "before_save": "tessuto_hr.overrides.attendance_override.before_save",
+#     }
+#
+# }
 # doc_events = {
 # "Timesheet": {
 #     "on_submit": "tessuto_hr.events.add_up_over_time.submit",

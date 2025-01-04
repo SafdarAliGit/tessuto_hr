@@ -1,7 +1,7 @@
 frappe.ui.form.on('Shift Type', {
     refresh: function (frm) {
         // Add custom button
-        frm.add_custom_button('Create Timesheet For DOT', function () {
+        frm.add_custom_button('Update Late Entry Count', function () {
             // Open a dialog to get start_date and end_date
             const currentDate = frappe.datetime.get_today();
             const oneMonthBack = frappe.datetime.add_months(currentDate, -1);
@@ -24,12 +24,12 @@ frappe.ui.form.on('Shift Type', {
                         reqd: true
                     }
                 ],
-                primary_action_label: 'Create',
+                primary_action_label: 'Update',
                 primary_action(values) {
 
                     // Call the server-side function
                     frappe.call({
-                        method: "tessuto_hr.events.create_timesheet.create_timesheet",
+                        method: "tessuto_hr.events.set_late_entry_count.set_late_entry_count",
                         args: {
                             start_date: values.start_date,
                             end_date: values.end_date
