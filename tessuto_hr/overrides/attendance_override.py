@@ -17,10 +17,10 @@ def before_save(self,method):
 
     # Update the custom late entry count field
     if self.late_entry == 1:
-        count +=1
         self.custom_late_entry_count = count
-    self.custom_late_entry_count = count
 
-    days_for_absent_mark = frappe.db.get_single_value("Attendance Settings", 'days_for_absent_mark')
-    if count > 0 and count % days_for_absent_mark == 0:
-        self.status = "Absent"
+        days_for_absent_mark = frappe.db.get_single_value("Attendance Settings", 'days_for_absent_mark')
+        if count > 0 and count % days_for_absent_mark == 0:
+            self.status = "Absent"
+
+
