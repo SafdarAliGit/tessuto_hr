@@ -10,14 +10,15 @@ def set_late_entry_count(**args):
     late_entry_sum = get_late_entry_sum(start_date, end_date)
     days_for_absent_mark = frappe.db.get_single_value("Attendance Settings", 'days_for_absent_mark')
     for row in late_entry_sum:
-        frappe.db.set_value(
-            "Employee",
-            row["employee"],
-            {
-                "custom_total_late_entry_count": row["custom_total_late_entry_count"],
-                "custom_total_late_entry_absent": round((1 / days_for_absent_mark) * row['custom_total_late_entry_count'])
-            }
-        )
+        if row["custom_total_late_entry_count"] > 0:
+            frappe.db.set_value(
+                "Employee",
+                row["employee"],
+                {
+                    "custom_total_late_entry_count": row["custom_total_late_entry_count"],
+                    "custom_total_late_entry_absent": (row['custom_total_late_entry_count'] // days_for_absent_mark)
+                }
+            )
 
     frappe.db.commit()
     return frappe.msgprint(
