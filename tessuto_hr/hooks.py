@@ -233,3 +233,5 @@ doctype_js = {"Shift Type" : "public/js/shift_type.js"}
 # auth_hooks = [
 #	"tessuto_hr.auth.validate"
 # ]
+
+required_apps = ["lending"]
