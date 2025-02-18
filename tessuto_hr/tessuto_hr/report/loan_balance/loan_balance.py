@@ -124,7 +124,7 @@ def get_data(filters):
 			"penalty": repayment.penalty_amount,
 			"payable_amount": repayment.payable_amount,
 			"paid_amount": repayment.amount_paid,
-			"balance": repayment.payable_amount - repayment.amount_paid,
+			"balance": repayment.pending_principal_amount - repayment.amount_paid,
 			"currency": default_currency,
 		}
 
