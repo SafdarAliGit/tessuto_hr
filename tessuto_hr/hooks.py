@@ -139,11 +139,11 @@ doctype_js = {"Shift Type" : "public/js/shift_type.js"}
 #     "on_submit": "tessuto_hr.events.add_up_over_time.submit",
 # },
 # }
-# doc_events = {
-# "Attendance": {
-#     "on_submit": "tessuto_hr.events.attendance.custom_on_submit",
-# },
-# }
+doc_events = {
+"Employee Advance": {
+    "validate": "tessuto_hr.overrides.employee_advance.custom_validate",
+},
+}
 # Scheduled Tasks
 # ---------------
 
