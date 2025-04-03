@@ -1,0 +1,48 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-04-03 17:24:32.556726",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_vryh",
+  "ctc_percent"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_vryh",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "50",
+   "fieldname": "ctc_percent",
+   "fieldtype": "Percent",
+   "label": "CTC Percent"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2025-04-03 17:26:38.816527",
+ "modified_by": "Administrator",
+ "module": "Tessuto Hr",
+ "name": "Employee Advance Setting",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
