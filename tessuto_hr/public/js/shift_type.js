@@ -1,7 +1,7 @@
 frappe.ui.form.on('Shift Type', {
     refresh: function (frm) {
         // Add custom button
-        frm.add_custom_button('Update Late Entry Count', function () {
+        frm.add_custom_button('Update Late Entry and Early Exit Count', function () {
             // Open a dialog to get start_date and end_date
             const currentDate = frappe.datetime.get_today();
             const oneMonthBack = frappe.datetime.add_months(currentDate, -1);
