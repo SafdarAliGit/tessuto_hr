@@ -332,7 +332,7 @@
    "collapsible_depends_on": null,
    "columns": 0,
    "creation": "2025-04-23 22:58:08.107535",
-   "default": null,
+   "default": "0",
    "depends_on": null,
    "description": null,
    "docstatus": 0,
